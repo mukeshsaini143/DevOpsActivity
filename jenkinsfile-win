@@ -13,13 +13,11 @@ pipeline {
                 echo 'codereview..'
 		bat label: '', script: 'mvn -P metrics pmd:pmd'
            }
-	   post {
-                success {
-                    // Use the 'sh' step to run PMD and publish the report
-                    sh 'pmd CPD --minimum-tokens 100 --files **/*.java --language java --format xml --outputfile pmd.xml'
-                    publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '', reportFiles: 'pmd.xml', reportName: 'PMD Report', reportTitles: ''])
-                }
-            }	
+	    post {
+               success {
+                   pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd.xml', unHealthy: ''
+               }
+           }
         }
         stage('unit-test') {
 	   steps {
