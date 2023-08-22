@@ -15,7 +15,7 @@ pipeline {
            }
 	   post {
                success {
-                   pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd.xml', unHealthy: ''
+                   PMD canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd.xml', unHealthy: ''
                }
            }		
         }
